@@ -1,19 +1,23 @@
 package com.javarush.task.task19.task1928;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 /* 
 Исправить ошибку. Классы и интерфейсы
+Программа содержит всего 1 логическую ошибку.
+Найди и исправь ее.
+1. Класс Solution должен содержать интерфейс Example.
+2. Класс Solution должен содержать класс A который реализует интерфейс Example.
+3. Класс Solution должен содержать класс B который реализует интерфейс Example.
+4. Класс Solution должен содержать класс C который наследуется от класса A.
+5. Исправь всего одну логическую ошибку.
 */
-
 public class Solution {
     {
         System.out.println("This is the Solution class");
     }
 
-    public static void main(String... args) throws IOException {
+    public static void main(String[] args) throws IOException {
         try (
                 FileOutputStream outputStream = new FileOutputStream(args[0]);
                 InputStream is = Solution.class.getClassLoader().getResourceAsStream(args[1]);
@@ -42,7 +46,7 @@ public class Solution {
                 }
             }
 
-            if (result instanceof A) {
+            if (result instanceof C) {
                 C p = (C) result;
                 System.out.println(p.getClass().getSimpleName());
             }
