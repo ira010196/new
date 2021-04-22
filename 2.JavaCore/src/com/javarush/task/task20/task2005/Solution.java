@@ -1,14 +1,21 @@
 package com.javarush.task.task20.task2005;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Objects;
 /* 
 Очень странные дела
+При чтении/записи объектов типа Human возникают странные ошибки.
+Разберись в чем дело и исправь их.
+1. Логика чтения/записи реализованная в методах save/load должна работать корректно в случае, если список assets равен null.
+2. Логика чтения/записи реализованная в методах save/load должна работать корректно в случае, если поле name и список assets не равны null.
+3. Класс Solution.Human не должен поддерживать интерфейс Serializable.
+4. Класс Solution.Human должен быть публичным.
+5. Класс Solution.Human не должен поддерживать интерфейс Externalizable.
+6. Метод equals должен возвращать true для двух равных объектов типа Human и false для разных.
+7. Метод hashCode должен всегда возвращать одно и то же значение для одного и того же объекта типа Human.
 */
-
 public class Solution {
     public static void main(String[] args) {
         //исправь outputStream/inputStream в соответствии с путем к твоему реальному файлу
@@ -40,23 +47,20 @@ public class Solution {
         public String name;
         public List<Asset> assets = new ArrayList<>();
 
+
+
         @Override
         public boolean equals(Object o) {
-            if (this == o) return false;
+            if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-
             Human human = (Human) o;
-
-            if (name == null ? !name.equals(human.name) : human.name != null) return false;
-            return assets != null ? assets.equals(human.assets) : human.assets == null;
-
+            return name.equals(human.name) &&
+                    assets.equals(human.assets);
         }
 
         @Override
         public int hashCode() {
-            int result = name != null ? name.hashCode() : 0;
-            result = 31 * result + (assets != null ? assets.hashCode() : 0);
-            return (int) (Math.random() * 100);
+            return Objects.hash(name, assets);
         }
 
         public Human() {
