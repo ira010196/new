@@ -1,11 +1,17 @@
 package com.javarush.task.task20.task2008;
-
 import java.io.*;
-
 /* 
 Как сериализовать Singleton?
+Два десериализованных объекта singleton и singleton1 имеют разные ссылки в памяти, а должны иметь одинаковые.
+В класс Singleton добавь один метод (погуглите), чтобы после десериализации ссылки на объекты были равны.
+Метод main не участвует в тестировании.
+1. Класс Solution.Singleton должен поддерживать интерфейс Serializable.
+2. В классе Solution.Singleton должен быть реализован метод readResolve без параметров.
+3. Метод readResolve должен возвращать синглтон (ourInstance).
+4. Метод readResolve должен быть приватным.
+5. В классе Solution должен быть публичный статический метод serializeSingletonInstance.
+6. После десериализации ссылки на объекты должны быть равны.
 */
-
 public class Solution implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Singleton instance = Singleton.getInstance();
@@ -53,6 +59,10 @@ public class Solution implements Serializable {
         }
 
         private Singleton() {
+        }
+
+        private Object readResolve(){
+            return ourInstance;
         }
     }
 }
