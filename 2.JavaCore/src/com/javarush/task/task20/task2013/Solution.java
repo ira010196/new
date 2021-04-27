@@ -1,23 +1,30 @@
 package com.javarush.task.task20.task2013;
-
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.List;
-
 /* 
 Externalizable Person
+Класс Person должен сериализовываться с помощью интерфейса Externalizable.
+Исправь ошибку сериализации.
+Сигнатуры методов менять нельзя.
+1. В классе Solution.Person должен быть создан публичный конструктор без параметров.
+2. В классе Solution.Person должен быть создан конструктор с тремя параметрами (String firstName, String lastName, int age).
+3. Класс Solution.Person должен поддерживать интерфейс Externalizable.
+4. Методы readExternal и writeExternal должны позволять корректно сериализовывать и десериализовывать объекты типа Person.
 */
-
 public class Solution {
-    public static class Person {
+    public static class Person implements Externalizable{
         private String firstName;
         private String lastName;
         private int age;
         private Person mother;
         private Person father;
         private List<Person> children;
+
+        public Person() {
+        }
 
         public Person(String firstName, String lastName, int age) {
             this.firstName = firstName;
@@ -41,18 +48,18 @@ public class Solution {
         public void writeExternal(ObjectOutput out) throws IOException {
             out.writeObject(mother);
             out.writeObject(father);
-            out.writeChars(firstName);
-            out.writeChars(lastName);
+            out.writeObject(firstName);
+            out.writeObject(lastName);
             out.writeInt(age);
             out.writeObject(children);
         }
 
         @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-            firstName = in.readLine();
-            lastName = in.readLine();
-            father = (Person) in.readObject();
             mother = (Person) in.readObject();
+            father = (Person) in.readObject();
+            firstName = (String) in.readObject();
+            lastName = (String) in.readObject();
             age = in.readInt();
             children = (List) in.readObject();
         }
