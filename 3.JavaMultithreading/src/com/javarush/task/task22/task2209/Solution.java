@@ -63,7 +63,7 @@ public class Solution {
     public static StringBuilder getLine(String... words) {
 //        List<String> strings = Arrays.asList(words);
 //        List <String> result = new ArrayList<>();
-//        if (strings.stream().allMatch(String::isEmpty)){
+//        if (strings.stream().allMatch(String::isNull)){
 //            return new StringBuilder();
 //        }
 //        StringBuilder buildString = new StringBuilder(strings.get(0));
