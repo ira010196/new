@@ -1,8 +1,9 @@
 package com.javarush.task.task22.task2211;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 
 /* 
 Смена кодировки
